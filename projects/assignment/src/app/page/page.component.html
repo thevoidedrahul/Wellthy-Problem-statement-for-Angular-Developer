@@ -1,0 +1,91 @@
+<div class="page-container">
+  <div class="page-flex">
+    <div class="align-left">
+      <img class="logo" src="https://wellthytherapeutics.com/wp-content/uploads/2020/07/brand-logo.png">
+      <section class="store-container">
+        <section class="hint-container">
+          <p>Download & install the app for mode details</p>
+        </section>
+        <section class="button-container">
+          <div class="flex">
+            <section class="button-section">
+              <button (click)="goToStore(GoogleStoreLink)">
+                <div class="flex">
+                  <img class="icon" src="../../assets/image/google-store.svg">
+                  <div class="text">
+                    <div class="sm-text">
+                      GET IT ON
+                    </div>
+                    <div class="lg-text">
+                      Google Play
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </section>
+            <section class="button-section">
+              <button (click)="goToStore(AppleStoreLink)">
+                <div class="flex">
+                  <img class="icon" src="../../assets/image/ios-store.svg">
+                  <div class="text">
+                    <div class="sm-text">
+                      Download on the
+                    </div>
+                    <div class="lg-text">
+                      App Store
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </section>
+          </div>
+        </section>
+      </section>
+      <section class="link-container">
+        <section class="hint-section">
+          <p> or enter your mobile number to get the link</p>
+        </section>
+        <section class="form-section">
+          <form class="form" #formPhoneNumber="ngForm">
+            <div class="input-field">
+              <div class="code-input">
+                <mat-form-field>
+                  <mat-select name="countryCodeModel" [(ngModel)]="countryCode" #countryCodeModel="ngModel"
+                    (ngModelChange)="setLinkSentValue(false)">
+                    <mat-option *ngFor="let country of countryList" [value]="country.dialCode">{{ country.dialCode }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix class="material-icons-round">keyboard_arrow_down</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="number-input">
+                <mat-form-field>
+                  <input type="number" matInput name="phoneNumberModel" #phoneNumberModel="ngModel"
+                    [(ngModel)]="phoneNumber" (ngModelChange)="setLinkSentValue(false)" autofocus autocomplete="off"
+                    required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="button-section">
+              <button mat-button class="submit-button" [ngClass]="{'submitted' : linkSent}" type="submit"
+                [disabled]="formPhoneNumber.form.valid || linkSent" (click)="submitForm(formPhoneNumber.form)">
+                <div matRipple [matRippleCentered]="true" [matRippleUnbounded]="true"
+                  [matRippleColor]="'rgba(252, 141, 51, 0.5)'">
+                  <ng-container *ngIf="!linkSent; else LinkSentTemplate">
+                    Get Link
+                  </ng-container>
+                  <ng-template #LinkSentTemplate>
+                    Sent
+                  </ng-template>
+                </div>
+              </button>
+            </div>
+          </form>
+        </section>
+      </section>
+    </div>
+    <div class="align-right">
+      <img src="../../assets/image/store-img.png">
+    </div>
+  </div>
+</div>
